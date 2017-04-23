@@ -1,0 +1,35 @@
+.gameTile {
+    width : 50px;
+    height : 50px;
+    float : left;
+    border-style : solid;
+    border-width : 1px;
+}
+
+.emptyTile {
+    background-color : gray;
+}
+
+.blocking {
+    background-color : black;
+}
+
+.mouseOver {
+    filter : brightness(1.5);
+}
+
+.selectedTile {
+    background-color : orange;
+}
+
+.commitedTile {
+    background-color : red;
+}
+
+.startTile {
+    background-color : green;
+}
+
+.lineBreak {
+    clear : both;
+}
