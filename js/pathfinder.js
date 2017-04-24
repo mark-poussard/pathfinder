@@ -8,6 +8,7 @@ var controller = {
 
     init : function(container, level){
 	controller.containerCallBack = container;
+	controller.destroy();
 	let layout = level.levelLayout();
 	for(let j=0, layoutY=layout.length; j<layoutY; j++){
 	    for(let i=0, layoutX=layout[j].length; i<layoutX; i++){
@@ -120,12 +121,28 @@ var controller = {
 
     checkGameStatus : function(){
 	let emptyTiles = document.getElementsByClassName("emptyTile");
-	if(emptyTiles.length === 0){
+	let startTile = document.getElementsByClassName("startTile");
+	if(emptyTiles.length === 0 && startTile.length === 0){
 	    let winMessage = document.createElement("p");
 	    winMessage.innerHTML = "GAME WON !";
 	    controller.containerCallBack.appendChild(winMessage);
 	}
-    }
+	else if(startTile.length === 0){
+		let loseMessage = document.createElement("p");
+	    loseMessage.innerHTML = "GAME LOST.";
+	    controller.containerCallBack.appendChild(loseMessage);
+		
+	}
+    },
+	
+	destroy : function(){
+		if(controller.containerCallBack){
+			let node = controller.containerCallBack;
+			while(node.firstChild){
+				node.removeChild(node.firstChild);
+			}
+		}
+	}
 
 };
 

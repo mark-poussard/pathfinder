@@ -6,8 +6,17 @@
 <link rel="stylesheet" href="index.css">
 </head>
 <body>
+<div id="menu">
+	<ul>
+		<li><input type="button" onclick="menu.selectLevel('pathfinder-game', level1)" value="Level 1" /></li>
+		<li><input type="button" onclick="menu.selectLevel('pathfinder-game', level2)" value="Level 2" /></li>
+		<li><input type="button" onclick="menu.selectLevel('pathfinder-game', level3)" value="Level 3" /></li>
+		<li><input type="button" onclick="menu.selectLevel('pathfinder-game', level4)" value="Level 4" /></li>
+	</ul>
+</div>
 <div id="pathfinder-game" onmouseleave="controller.abortSelection()">
 </div>
+<script src="js/menu.js"></script>
 <script src="js/pathfinder.js"></script>
 <script src="js/levels.js"></script>
 </body>
