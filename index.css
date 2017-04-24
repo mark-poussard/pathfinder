@@ -7,7 +7,7 @@
 }
 
 .emptyTile {
-    background-color : gray;
+    background-color : lightgray;
 }
 
 .blocking {
@@ -20,19 +20,19 @@
 }
 
 .selectedTile {
-    background-color : orange;
+    background-color : lightgreen;
 }
 
 .commitedTile {
-    background-color : red;
+    background-color : SeaGreen;
 }
 
 .startTile {
-    background-color : green;
+    background-color : lightgreen;
 }
 
 .goalTile{
-	background-color : blue;
+	background-color : PaleTurquoise;
 }
 
 .lineBreak {
