@@ -30,6 +30,10 @@
     background-color : green;
 }
 
+.goalTile{
+	background-color : blue;
+}
+
 .lineBreak {
     clear : both;
 }

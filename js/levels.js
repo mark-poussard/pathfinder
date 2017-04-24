@@ -2,7 +2,7 @@ var level1 = {
 
     levelLayout : function(){
 	let layout = [];
-	layout[0] = [0, 0, 0, 0, 0];
+	layout[0] = [0, 0, 0, 0, 3];
 	layout[1] = [0, 0, 0, 0, 0];
 	layout[2] = [0, 0, 0, 0, 0];
 	layout[3] = [1, 1, 0, 0, 0];

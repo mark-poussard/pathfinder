@@ -34,8 +34,11 @@ var controller = {
 	        tile.classList.add("startTile");
 	        controller.previousTileStart = tile;
 	        break;
+		case 3:
+			tile.classList.add("goalTile");
+			break;
 	}
-	tile.onclick = controller.tileClick;
+	tile.onmousedown = controller.tileClick;
 	tile.onmouseover = controller.tileOver;
 	tile.onmouseenter = controller.tileEnter;
 	tile.onmouseleave = controller.tileLeave;
@@ -64,6 +67,9 @@ var controller = {
 	      || tile.classList.contains("selectedTile")){
 		controller.abortSelection();
 	    }
+		else if(tile.classList.contains("goalTile")){
+			controller.endSelection();
+		}
 	    else{
 		tile.classList.remove("emptyTile");
 		tile.classList.add("startTile");
@@ -92,7 +98,10 @@ var controller = {
 	    startTile[0].classList.remove("startTile");
 	}
 	controller.selecting = false;
-	controller.previousTileStart.classList.add("startTile");
+	if(controller.previousTileStart){
+		controller.previousTileStart.classList.remove("emptyTile");
+		controller.previousTileStart.classList.add("startTile");
+	}
     },
 
     endSelection : function(){
@@ -114,7 +123,7 @@ var controller = {
 	if(emptyTiles.length === 0){
 	    let winMessage = document.createElement("p");
 	    winMessage.innerHTML = "GAME WON !";
-	    controller.containerCallBack.appendChild();
+	    controller.containerCallBack.appendChild(winMessage);
 	}
     }
 
@@ -123,4 +132,21 @@ var controller = {
 window.onload = function(){
     let mainContainer = document.getElementById("pathfinder-game");
     controller.init(mainContainer, level1);
+}
+
+window.onmouseup = function(event){
+	controller.abortSelection();
+}
+
+var mouseX = 0;
+var mouseY = 0;
+window.onmousemove = function(event){
+	let deltaX = event.pageX - mouseX;
+	let deltaY = event.pageY - mouseY;
+	if((Math.abs(deltaX) > 100)
+		|| (Math.abs(deltaY) > 100)){
+		controller.abortSelection();
+	}
+	mouseX = event.pageX;
+	mouseY = event.pageY;
 }
