@@ -4,12 +4,15 @@ var controller = {
     nbTilesY : 5,
     selecting : false,
     containerCallBack : undefined,
+	currentLevel : undefined,
     previousTileStart : undefined,
 
     init : function(container, level){
 	controller.containerCallBack = container;
+	controller.currentLevel = level;
 	controller.destroy();
 	let layout = level.levelLayout();
+	container.style.width = ((layout[0].length) * 52) + "px";
 	for(let j=0, layoutY=layout.length; j<layoutY; j++){
 	    for(let i=0, layoutX=layout[j].length; i<layoutX; i++){
 		let tile = controller.createTile(layout[j][i]);
@@ -124,14 +127,26 @@ var controller = {
 	let startTile = document.getElementsByClassName("startTile");
 	if(emptyTiles.length === 0 && startTile.length === 0){
 	    let winMessage = document.createElement("p");
-	    winMessage.innerHTML = "GAME WON !";
+	    winMessage.innerHTML = "LEVEL WON !";
 	    controller.containerCallBack.appendChild(winMessage);
+		
+		let nextLevelButton = document.createElement("input");
+		nextLevelButton.className = "button";
+		nextLevelButton.value = "Next level";
+		nextLevelButton.type = "button";
+		nextLevelButton.onclick = function() { controller.init(controller.containerCallBack, window["level" + (controller.currentLevel.levelNumber + 1)]) };
+		controller.containerCallBack.appendChild(nextLevelButton);
 	}
 	else if(startTile.length === 0){
 		let loseMessage = document.createElement("p");
 	    loseMessage.innerHTML = "GAME LOST.";
+		let resetButton = document.createElement("input");
+		resetButton.className = "button";
+		resetButton.value = "Reset level";
+		resetButton.type = "button";
+		resetButton.onclick = function() { controller.init(controller.containerCallBack, controller.currentLevel) };
 	    controller.containerCallBack.appendChild(loseMessage);
-		
+		controller.containerCallBack.appendChild(resetButton);
 	}
     },
 	
