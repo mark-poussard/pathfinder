@@ -12,6 +12,10 @@
 	background-color : inherit;
 	color : RoyalBlue;
 	margin : 0;
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+	cursor : default;
 }
 
 .menu {
@@ -25,7 +29,7 @@
 	padding : 20px;
 }
 
-.button {
+input[type="button"] {
 	background-color: darkgray;
     border: none;
     color: white;
@@ -38,7 +42,7 @@
 	border-radius : 3px;
 }
 
-.button:hover {
+input[type="button"]:hover {
 	filter : brightness(1.25);
 	color: black;
 	cursor : pointer;
@@ -81,6 +85,7 @@
 
 .startTile {
     background-color : lightgreen;
+	cursor : move;
 }
 
 .goalTile{

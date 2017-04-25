@@ -4,14 +4,14 @@ var controller = {
     nbTilesY : 5,
     selecting : false,
     containerCallBack : undefined,
-	currentLevel : undefined,
+	currentLevel : 0,
     previousTileStart : undefined,
 
     init : function(container, level){
 	controller.containerCallBack = container;
 	controller.currentLevel = level;
 	controller.destroy();
-	let layout = level.levelLayout();
+	let layout = levels.levelLayout()[level];
 	container.style.width = ((layout[0].length) * 52) + "px";
 	for(let j=0, layoutY=layout.length; j<layoutY; j++){
 	    for(let i=0, layoutX=layout[j].length; i<layoutX; i++){
@@ -22,6 +22,12 @@ var controller = {
 	    lineBreak.className = "lineBreak";
 	    container.appendChild(lineBreak);
 	}
+	let resetButton = document.createElement("input");
+		resetButton.id = "gameInteractButton";
+		resetButton.value = "Reset level";
+		resetButton.type = "button";
+		resetButton.onclick = function() { controller.init(controller.containerCallBack, controller.currentLevel) };
+		container.appendChild(resetButton);
     },
 
     createTile : function(tileType){
@@ -130,23 +136,17 @@ var controller = {
 	    winMessage.innerHTML = "LEVEL WON !";
 	    controller.containerCallBack.appendChild(winMessage);
 		
-		let nextLevelButton = document.createElement("input");
-		nextLevelButton.className = "button";
+		let nextLevelButton = document.getElementById("gameInteractButton");
 		nextLevelButton.value = "Next level";
-		nextLevelButton.type = "button";
-		nextLevelButton.onclick = function() { controller.init(controller.containerCallBack, window["level" + (controller.currentLevel.levelNumber + 1)]) };
-		controller.containerCallBack.appendChild(nextLevelButton);
+		nextLevelButton.onclick = function() { controller.init(controller.containerCallBack, (controller.currentLevel + 1)) };
 	}
 	else if(startTile.length === 0){
 		let loseMessage = document.createElement("p");
 	    loseMessage.innerHTML = "GAME LOST.";
-		let resetButton = document.createElement("input");
-		resetButton.className = "button";
+		let resetButton = document.getElementById("gameInteractButton");
 		resetButton.value = "Reset level";
-		resetButton.type = "button";
 		resetButton.onclick = function() { controller.init(controller.containerCallBack, controller.currentLevel) };
 	    controller.containerCallBack.appendChild(loseMessage);
-		controller.containerCallBack.appendChild(resetButton);
 	}
     },
 	
@@ -163,7 +163,9 @@ var controller = {
 
 window.onload = function(){
     let mainContainer = document.getElementById("pathfinder-game");
-    controller.init(mainContainer, level1);
+    controller.init(mainContainer, 0);
+	let menuContainer = document.getElementById("menu");
+	menu.generateMenu(menuContainer);
 }
 
 window.onmouseup = function(event){
@@ -175,8 +177,8 @@ var mouseY = 0;
 window.onmousemove = function(event){
 	let deltaX = event.pageX - mouseX;
 	let deltaY = event.pageY - mouseY;
-	if((Math.abs(deltaX) > 100)
-		|| (Math.abs(deltaY) > 100)){
+	if((Math.abs(deltaX) > 50)
+		|| (Math.abs(deltaY) > 50)){
 		controller.abortSelection();
 	}
 	mouseX = event.pageX;
