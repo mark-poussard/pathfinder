@@ -47,6 +47,14 @@ var controller = {
 		case 3:
 			tile.classList.add("goalTile");
 			break;
+		case '-':
+			tile.classList.add("emptyTile");
+			tile.classList.add("hOnlyTile");
+			break;
+		case '|':
+			tile.classList.add("emptyTile");
+			tile.classList.add("vOnlyTile");
+			break;
 	}
 	tile.onmousedown = controller.tileClick;
 	tile.onmouseover = controller.tileOver;
@@ -80,6 +88,28 @@ var controller = {
 		else if(tile.classList.contains("goalTile")){
 			controller.endSelection();
 		}
+		else if(tile.classList.contains("hOnlyTile")){
+			let tileRect = tile.getBoundingClientRect();
+			if(mouseY < tileRect.top
+			|| mouseY > tileRect.bottom){
+				controller.abortSelection();	
+			}
+			else{
+				tile.classList.remove("emptyTile");
+				tile.classList.add("startTile");
+			}
+		}
+		else if(tile.classList.contains("vOnlyTile")){
+			let tileRect = tile.getBoundingClientRect();
+			if(mouseX < tileRect.left
+			|| mouseX > tileRect.right){
+				controller.abortSelection();	
+			}
+			else{
+				tile.classList.remove("emptyTile");
+				tile.classList.add("startTile");
+			}
+		}
 	    else{
 		tile.classList.remove("emptyTile");
 		tile.classList.add("startTile");
@@ -93,6 +123,20 @@ var controller = {
 	if(controller.selecting){
 	    tile.classList.add("selectedTile");
 	    tile.classList.remove("startTile");
+		if(tile.classList.contains("hOnlyTile")){
+			let tileRect = tile.getBoundingClientRect();
+			if(event.pageY < tileRect.top
+			|| event.pageY > tileRect.bottom){
+				controller.abortSelection();	
+			}
+		}
+		else if(tile.classList.contains("vOnlyTile")){
+			let tileRect = tile.getBoundingClientRect();
+			if(event.pageX < tileRect.left
+			|| event.pageX > tileRect.right){
+				controller.abortSelection();	
+			}
+		}
 	}
     },
 
