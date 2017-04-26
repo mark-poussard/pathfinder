@@ -80,7 +80,10 @@ var controller = {
     tileEnter : function(event){
 	if(controller.selecting){
 	    let tile = event.target;
-	    if(tile.classList.contains("blocking")
+		if(!controller.isMoveValid(tile)){
+			controller.abortSelection();
+		}
+	    else if(tile.classList.contains("blocking")
 	      || tile.classList.contains("commitedTile")
 	      || tile.classList.contains("selectedTile")){
 		controller.abortSelection();
@@ -201,6 +204,17 @@ var controller = {
 				node.removeChild(node.firstChild);
 			}
 		}
+	},
+	
+	isMoveValid : function(tile){
+		let tileRect = tile.getBoundingClientRect();
+		if((mouseX < tileRect.left && mouseY < tileRect.top)
+			|| (mouseX < tileRect.left && mouseY > tileRect.bottom)
+			|| (mouseX > tileRect.right && mouseY < tileRect.top)
+			|| (mouseX > tileRect.right && mouseY > tileRect.bottom)){
+			return false;
+		}
+		return true
 	}
 
 };

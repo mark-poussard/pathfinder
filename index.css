@@ -96,14 +96,16 @@ input[type="button"]:hover {
 	border-top-width : 10px;
 	border-bottom-width : 10px;
 	box-sizing : border-box;
-	margin : 1px;
+	width : 52px;
+	height : 52px;
 }
 
 .vOnlyTile{
 	border-left-width : 10px;
 	border-right-width : 10px;
 	box-sizing : border-box;
-	margin : 1px;
+	width : 52px;
+	height : 52px;
 }
 
 .lineBreak {
