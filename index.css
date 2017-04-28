@@ -48,6 +48,10 @@ input[type="button"]:hover {
 	cursor : pointer;
 }
 
+input.selectedButton[type="button"] {
+	background-color : red;
+}
+
 .content {
 	display : block;
 	float : left;

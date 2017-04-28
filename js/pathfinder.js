@@ -185,7 +185,7 @@ var controller = {
 		
 		let nextLevelButton = document.getElementById("gameInteractButton");
 		nextLevelButton.value = "Next level";
-		nextLevelButton.onclick = function() { controller.init(controller.containerCallBack, (controller.currentLevel + 1)) };
+		nextLevelButton.onclick = function() { menu.selectLevel('pathfinder-game', (controller.currentLevel + 1)) };
 	}
 	else if(startTile.length === 0){
 		let loseMessage = document.createElement("p");
@@ -220,10 +220,10 @@ var controller = {
 };
 
 window.onload = function(){
-    let mainContainer = document.getElementById("pathfinder-game");
-    controller.init(mainContainer, 0);
 	let menuContainer = document.getElementById("menu");
 	menu.generateMenu(menuContainer);
+	let buttonContainer = document.getElementById("Level1");
+	menu.selectLevel("pathfinder-game", 0);
 }
 
 window.onmouseup = function(event){
