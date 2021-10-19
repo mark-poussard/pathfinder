@@ -2,7 +2,7 @@
 
 Pathfinder is a small JavaScript game based on a video game mini-game is used to play.
 
-You can play it at : https://mark-poussard.github.io/pathfinder/
+You can play it at : https://mark.poussard.io/pathfinder/
 
 ## How to play
 
